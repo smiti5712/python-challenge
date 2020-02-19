@@ -16,34 +16,32 @@ with open("PyBankOutput.txt", 'a') as f:
 #creating empty lists
     months = []
     profit_loss = []
-    profit_loss_no_header = []
     Diff_profit_loss = []
-    Diff_profit_loss_with_header = ["ProfitLossChange"]
-
+    
 #Opening the file in read mode
     with open(Budget_csv, "r", encoding='utf-8') as csvfile:
  
         csvreader = csv.reader(csvfile, delimiter=",")
+        #next row to skip reading the Header
+        next(csvreader)
 
     #Looping through the first column to count number of months
         for row in csvreader:
             months.append(row[0])
             profit_loss.append(row[1])
-            profit_loss_no_header.append(row[1])
-        print("Total Months: " + str(len(months)-1))
-        writeTotalMonth = "Total Months: " + str(len(months)-1)
+            
+        Total_months = str(len(months))
+        writeTotalMonth = ("Total Months: " + Total_months)
+        print(writeTotalMonth)
         f.write(writeTotalMonth + "\n")
 
-#Removing the header for Profit Loss column
-        profit_loss_no_header.pop(0)
-
-#Creating a counter for the Total Value
+#Creating a counter for the Total Profit Loss
         Total_ProfitLoss = 0
 #Creating a counter for storing Prev Profit Loss value
         prev_profit_loss = 0
 
 #looping through each value in profit loss column
-        for i in profit_loss_no_header:
+        for i in profit_loss:
     #Calculating the Total by adding profit Loss value each time the loop progresses
             Total_ProfitLoss = Total_ProfitLoss+ int(i)
     #Assigning Current Profit Loss value
@@ -52,7 +50,7 @@ with open("PyBankOutput.txt", 'a') as f:
             Difference_profit_loss = current_Profit_loss - prev_profit_loss
     #Appending the Diference in profit loss value to the list
             Diff_profit_loss.append(Difference_profit_loss )
-            Diff_profit_loss_with_header.append(Difference_profit_loss )
+            
     #Assigning  current profit loss as the Previous profit loss, for the next loop to start
             prev_profit_loss = current_Profit_loss
 
@@ -61,16 +59,17 @@ with open("PyBankOutput.txt", 'a') as f:
     print (writeTotalprofitLoss)
     f.write(writeTotalprofitLoss + "\n")
 
-#removing the first value from Difference profit Loss List
-    Diff_profit_loss.pop(0) 
-    Diff_profit_loss_with_header[1] = 0
+#removing the first value from Difference profit Loss List, since that is not the actual profitLoss change
+    
+    Diff_profit_loss[0] = 0
+    
 #Creating a counter for the Total Change in profit Loss to use for Average calculation
     Total_Change_profit_loss = 0
 #looping through the Difference in Profit Loss List
     for j in Diff_profit_loss:
         Total_Change_profit_loss = Total_Change_profit_loss + int(j)
 #calculating the average change in profit loss and printing
-    writeAverageChange = "Average Change: $" + str(round(Total_Change_profit_loss/len(Diff_profit_loss),2))
+    writeAverageChange = "Average Change: $" + str(round(Total_Change_profit_loss/(len(Diff_profit_loss)-1),2))
     print(writeAverageChange)
     f.write(writeAverageChange + "\n")
 
@@ -79,11 +78,11 @@ with open("PyBankOutput.txt", 'a') as f:
     Max_profit_decrease = min(Diff_profit_loss)
 
 # Zip lists together
-    new_budget_csv = zip(months,profit_loss,Diff_profit_loss_with_header)
-
+    new_budget_csv = zip(months,profit_loss,Diff_profit_loss) 
+    
 #search in new list , the values for Max Profit Increase and Max profit Decrease and get respective Dates
     for eachrow in new_budget_csv:
-#print (eachrow[2])
+       
         if Max_profit_increase== eachrow[2]  :
             writeGreatestIncrease = "Greatest Increase in Profits: " + eachrow[0] + " ($" + str(Max_profit_increase) + ")"
             print (writeGreatestIncrease)
