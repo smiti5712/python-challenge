@@ -18,8 +18,9 @@ with open(paragraph1, 'r') as text:
     
     #split lines by space to get the count of words  
     words = re.split(" ",lines_var)
-    #replace spaces in lines with no space, to get a line without space, required to get number of letters
-    lines_without_space = lines_var.replace(" ","")
+    #use findall to get all letters 
+    letters = re.findall("[a-zA-Z]", lines_var)
+    
     #print Paragraph Analysis
 
     print("Paragraph Analysis")
@@ -28,6 +29,6 @@ with open(paragraph1, 'r') as text:
     #subtracting 1 from the length of sentences to ignore the last full stop (.)
     print("Approximate Sentence Count: " + str(len(sentences)-1)) 
     #Average lettercount = length of line without space/number of words 
-    print("Average Letter Count: " + str(round(len(lines_without_space)/len(words),1)))
+    print("Average Letter Count: " + str(round(len(letters)/len(words),1)))
     #Average sentence length = words count/number of sentence 
     print("Average Sentence Length: " + str(round(len(words)/len(sentences),1)))
