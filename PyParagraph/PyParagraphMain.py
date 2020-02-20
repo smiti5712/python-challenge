@@ -2,7 +2,7 @@ import os
 import re
 
 # Set variable for input file, which is in same location from where the code is running
-paragraph1= "paragraph_1.txt"
+paragraph1= "paragraph_2.txt"
 
 #Open file in Read mode
 with open(paragraph1, 'r') as text:
@@ -17,9 +17,10 @@ with open(paragraph1, 'r') as text:
     sentences = re.split("\.+", new_sentences)
     
     #split lines by space to get the count of words  
-    words = re.split(" ",lines_var)
+    words = re.split(" ",new_sentences)
+    
     #use findall to get all letters 
-    letters = re.findall("[a-zA-Z]", lines_var)
+    letters = re.findall("[a-zA-Z]", new_sentences)
     
     #print Paragraph Analysis
 
