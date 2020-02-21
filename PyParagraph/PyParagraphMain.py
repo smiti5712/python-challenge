@@ -1,8 +1,8 @@
 import os
 import re
 
-# Set variable for input file, which is in same location from where the code is running
-paragraph1= "paragraph_2.txt"
+# Set variable for input file, which is in Resources location, 2 directories up from where the code is running
+paragraph1= os.path.join("..","..","Resources","paragraph_1.txt")
 
 #Open file in Read mode
 with open(paragraph1, 'r') as text:
