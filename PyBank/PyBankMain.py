@@ -4,8 +4,8 @@ import csv
 #Opening the output file in append mode
 with open("PyBankOutput.txt", 'a') as f:
     
-#Creating Path for the Budget_data file which is in Resources location, 2 directories up from where the code is running
-    Budget_csv= os.path.join("..","..","Resources","budget_data.csv")
+#Creating Path for the Budget_data file which is in Resources location, 1 directory up from where the code is running
+    Budget_csv= os.path.join("..","Resources","budget_data.csv")
 
 
 #printing the Header for Display

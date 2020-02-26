@@ -3,8 +3,8 @@ import csv
 
 #Opening the output file in append mode
 with open("PyPollOutput.txt", 'a') as f:
-#Creating Path for Election_data file which is in the Resources folder 2 dirctories up from where the code is running
-    Election_csv = os.path.join("..","..","Resources","election_data.csv")
+#Creating Path for Election_data file which is in the Resources folder 1 dirctory up from where the code is running
+    Election_csv = os.path.join("..","Resources","election_data.csv")
 
 #printing  Header for Display
     print("Election Results")

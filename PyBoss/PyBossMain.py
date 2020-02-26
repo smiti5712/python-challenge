@@ -3,8 +3,8 @@ import csv
 #importing datetime for date format conversion
 import datetime
 
-# Set variable for input file, which is in Resources folder, 2 directories up from where the code is running
-employee_data_csv = os.path.join("..","..","Resources", "employee_data.csv")
+# Set variable for input file, which is in Resources folder, 1 directory up from where the code is running
+employee_data_csv = os.path.join("..","Resources", "employee_data.csv")
 
 # Lists to store data
 Employee_ID = []
